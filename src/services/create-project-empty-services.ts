@@ -9,8 +9,10 @@ function CreateFile(filePath: string, content: string) {
 }
 
 async function CreateEmptyProject(projectName: string = 'target-FBXXX') {
+    
     const spinner = ora('Creando proyecto vacío...').start();
     await new Promise(resolve => setTimeout(resolve, 2000)); 
+
     //creando la carpeta del proyecto
     const projectPath = path.join(process.cwd(), projectName);
 
@@ -21,7 +23,7 @@ async function CreateEmptyProject(projectName: string = 'target-FBXXX') {
     }
 
     fs.mkdirSync(projectPath);
-    spinner.succeed(chalk.green('Proyecto vacío creado exitosamente en: ' + projectPath));
+    spinner.succeed(chalk.green('Proyecto vacío creado exitosamente en: ' + chalk.bgGreen.black(projectPath)));
 
     //creando archivo dentro de la carpeta
     const filePath = path.join(projectPath, 'index.html');
