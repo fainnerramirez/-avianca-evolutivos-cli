@@ -8,8 +8,9 @@ function CreateFile(filePath: string, content: string) {
     fs.writeFileSync(filePath, content, 'utf8');
 }
 
-function CreateEmptyProject(projectName: string = 'target-FBXXX') {
+async function CreateEmptyProject(projectName: string = 'target-FBXXX') {
     const spinner = ora('Creando proyecto vacío...').start();
+    await new Promise(resolve => setTimeout(resolve, 2000)); 
     //creando la carpeta del proyecto
     const projectPath = path.join(process.cwd(), projectName);
 
