@@ -1,30 +1,31 @@
-
 const fs = require('fs');
 const path = require('path');
 const getContentEmptyProject = require('../utils/project-empty-content');
+const chalk = require('chalk').default;
+const ora = require('ora').default;
 
 function CreateFile(filePath: string, content: string) {
     fs.writeFileSync(filePath, content, 'utf8');
-    console.log(`Archivo creado exitosamente en: ${filePath}`);
 }
 
 function CreateEmptyProject(projectName: string = 'target-FBXXX') {
-
+    const spinner = ora('Creando proyecto vacío...').start();
     //creando la carpeta del proyecto
     const projectPath = path.join(process.cwd(), projectName);
 
     if (fs.existsSync(projectPath)) {
-        console.error('El directorio ya existe. Por favor, elige otro nombre o elimina el directorio existente.');
+        spinner.fail();
+        console.error(chalk.red('Error: La carpeta del proyecto ya existe. Por favor, elige otro nombre o elimina la carpeta existente.'));
         process.exit(1);
     }
 
     fs.mkdirSync(projectPath);
-    console.log('Proyecto vacío creado exitosamente en:', projectPath);
+    spinner.succeed(chalk.green('Proyecto vacío creado exitosamente en: ' + projectPath));
 
     //creando archivo dentro de la carpeta
     const filePath = path.join(projectPath, 'index.html');
     if (fs.existsSync(filePath)) {
-        console.error('El archivo index.html ya existe. Por favor, elige otro nombre o elimina el archivo existente.');
+        console.error(chalk.red('Error: El archivo index.html ya existe. Por favor, elige otro nombre o elimina el archivo existente.'));
         process.exit(1);
     }
 
