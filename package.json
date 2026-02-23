@@ -1,0 +1,38 @@
+{
+  "name": "evolutivos-cli",
+  "bin": {
+    "evolutivos": "./dist/index.js"
+  },
+  "version": "1.0.0",
+  "description": "CLI para descargar templates pqara desarrollos de target",
+  "keywords": [
+    "CLI",
+    "avianca",
+    "evolutivos",
+    "template",
+    "target"
+  ],
+  "homepage": "https://github.com/fainnerramirez/-avianca-evolutivos-cli#readme",
+  "bugs": {
+    "url": "https://github.com/fainnerramirez/-avianca-evolutivos-cli/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fainnerramirez/-avianca-evolutivos-cli.git"
+  },
+  "license": "ISC",
+  "author": "Fainner Ramirez",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "link-cli": "npm link",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "commander": "^14.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "typescript": "^5.9.3"
+  }
+}

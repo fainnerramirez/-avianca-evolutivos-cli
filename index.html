@@ -1,0 +1,67 @@
+<style></style>
+<script>
+
+    (function () {
+
+        const device = document.querySelector("html").offsetWidth >= 992 ? "des" : "mob";
+        const numScript = "[FB_XXXX]";
+        console.log(numScript);
+
+        const copys = {};
+
+        const getLang = () => {
+            const lang = document.querySelector("html").getAttribute("lang");
+            const croLang = document.querySelector("html").getAttribute("cro-lang");
+            return !!lang ? lang : !!croLang ? croLang : "unknown-lang";
+        };
+
+        const getCroPage = () => {
+            const croPage = document.querySelector("html").getAttribute("cro-page");
+            return !!croPage ? croPage : "unknown-cro-page";
+        };
+
+        const ShowElement = (element) => {
+            console.log(numScript, "Target FB_XXXX cargado!");
+        }
+
+        const type = "0";
+        const interaccion = "int";
+        const flujo = "NBF"; // DX || NBF
+        const analitycsElem = flujo == "NBF" ? "dataLayer" : "gtmDt";
+
+        const trackEvents = (identificador) => {
+            const pushClickanalitycs = (e) => {
+                let t = "AT_${campaign.id}_" + device + "_" + interaccion + "_" + type + "_" + e;
+                console.log(numScript, "ANALITYCS:", t);
+                if (window[analitycsElem]) {
+                    window[analitycsElem].push({
+                        event: "sendTargetEvent",
+                        target_action: t,
+                    });
+                }
+            };
+
+            try {
+                pushClickanalitycs(identificador);
+            } catch (error) {
+                console.error(numScript, "Error pushing to analytics:", error);
+            }
+        };
+
+        const preload = (maxIntents) => {
+            setTimeout(() => {
+                console.log("Se ejecutó preload: ", maxIntents);
+                const element = document.querySelector("#example_selector");
+                if (element) {
+                    ShowElement(element);
+                } else if (maxIntents >= 75) {
+                    console.warn(numScript, "Elemento no ha cargado!");
+                } else {
+                    preload(maxIntents + 1);
+                }
+            }, 300);
+        };
+
+        if (device === "des" || device === "mob") preload(0);
+    })();
+</script>
